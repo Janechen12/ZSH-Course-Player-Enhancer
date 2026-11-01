@@ -1,0 +1,10 @@
+window.removedVideoBlur = [];
+
+for (const item of getEventListeners(window).blur || []) {
+  if (item.listener.toString().includes('离开页面，视频播放被暂停')) {
+    window.removeEventListener('blur', item.listener, item.useCapture);
+    window.removedVideoBlur.push(item);
+  }
+}
+
+console.log('已移除监听数量：', window.removedVideoBlur.length);
